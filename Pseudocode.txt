@@ -13,13 +13,17 @@ READ AND WRITE "cart" store with array [ record{"itemName","sumItem","priceItem"
 // Pengecekan apakah cart ada barang atau tidak
 IF "cart" lenght is more then or equal to 1
 
-    WHILE lenght "cart" is more then or equal to 1
+    READ AND WRITE "a" 
+    STORE "a" with number 0
+
+    WHILE "a" is less then lenght "cart"
         DO 
         // Penghitungan jumlah harga per barang
-        STORE "priceSumItem" with CALCULATE "cart"["sumItem"] * "cart"["priceItem"]
+        STORE "priceSumItem" with CALCULATE "cart"["a"]["sumItem"] * "cart"["a"]["priceItem"]
         
         // Penghitungan jumlah harga semua barang
         STORE "priceSumItems" with CALCULATE "priceSumItems" + "priceSumItem"
+        STORE "a" with CALCULATE "a" + 1
 
     // Pengecekan total harga memenuhi syarat mendapatkan harga diskon atau tidak
     IF "priceSumItems" more then or equal to 1.000.000
@@ -28,3 +32,16 @@ IF "cart" lenght is more then or equal to 1
 
 // Penghitungan uang kembalian dari uang yang dibayarkan
 STORE "changeMoney" with CALCULATE "moneyPaid" - "priceSumItems"
+
+READ AND WRITE "i" 
+STORE "i" with number 0
+
+// Pencetakan dokumen
+WHILE "i" is less then length "cart"
+    DO
+    PRINT "cart"["i"]["itemName"] + "cart"["i"]["sumItem"] + "cart"["i"]["priceItem"]
+    STORE "i" with CALCULATE "i" + 1
+
+PRINT "priceSumItems"
+PRINT "moneyPaid"
+PRINT "changeMoney"
