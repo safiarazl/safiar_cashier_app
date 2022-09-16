@@ -1,0 +1,11 @@
+PROGRAM CASHIER-APPLICATION
+
+// Inisialisasi variabel
+READ AND WRITE "itemName" with String
+READ AND WRITE "sumItem" with Number
+READ AND WRITE "priceItem" with Number
+READ AND WRITE "priceSumItems" with Number
+READ AND WRITE "discountPrice" with Number
+READ AND WRITE "moneyPaid" with Number
+READ AND WRITE "changeMoney" with Number
+READ AND WRITE "cart"
