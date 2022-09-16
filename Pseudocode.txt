@@ -8,4 +8,23 @@ READ AND WRITE "priceSumItems" with Number
 READ AND WRITE "discountPrice" with Number
 READ AND WRITE "moneyPaid" with Number
 READ AND WRITE "changeMoney" with Number
-READ AND WRITE "cart"
+READ AND WRITE "cart" store with array [ record{"itemName","sumItem","priceItem"} ]
+
+// Pengecekan apakah cart ada barang atau tidak
+IF "cart" lenght is more then or equal to 1
+
+    WHILE lenght "cart" is more then or equal to 1
+        DO 
+        // Penghitungan jumlah harga per barang
+        STORE "priceSumItem" with CALCULATE "cart"["sumItem"] * "cart"["priceItem"]
+        
+        // Penghitungan jumlah harga semua barang
+        STORE "priceSumItems" with CALCULATE "priceSumItems" + "priceSumItem"
+
+    // Pengecekan total harga memenuhi syarat mendapatkan harga diskon atau tidak
+    IF "priceSumItems" more then or equal to 1.000.000
+        STORE "discountPrice" with CALCULATE "priceSumItems" - ("priceSumItems" * 0.1)
+        STORE "priceSumItems" with "discountPrice"
+
+// Penghitungan uang kembalian dari uang yang dibayarkan
+STORE "changeMoney" with CALCULATE "moneyPaid" - "priceSumItems"
